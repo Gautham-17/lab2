@@ -2,7 +2,7 @@ import random
 
 def random_state():
     # One queen per row, column chosen randomly
-    return [random.randint(0, 7) for _ in range(8)]
+    return [random.randint(0, 7) for i in range(8)]
 
 def compute_conflicts(state):
     # Count number of pairs of queens attacking each other
@@ -74,12 +74,25 @@ def simulated_annealing():
     return current, current_conflicts
 
 # Run the algorithm
+def print_board(state):
+    for row in range(8):
+        line = ""
+        for col in range(8):
+            if state[col] == row:
+                line += " Q "
+            else:
+                line += " . "
+        print(line)
+
+print("\nChessboard:")
 if __name__ == "__main__":
     # Run the algorithm
     solution, conflicts = simulated_annealing()
     print("Simulated Annealing Solution:", solution)
     print("Conflicts:", conflicts)
+    print_board(solution)
 
     solution, conflicts = hill_climbing()
     print("Hill Climbing Solution:", solution)
     print("Conflicts:", conflicts)
+    print_board(solution)
